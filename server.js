@@ -18,13 +18,15 @@ const db = knex({
     }
 });
 
+const PORT = process.env.PORT ?? 3001;
+
 const app = express();
 app.use(express.json());
 app.use(cors());
 
 // * --> res = this is working
 app.get('/', (req, res) => {
-    res.send('success');
+    res.send('It\'s working!');
 });
 
 // * /signin endpoint --> POST = success/fail
@@ -32,17 +34,17 @@ app.post('/signin', (req, res) => {
     handleSignIn(req, res, db, bcrypt);
 });
 
-// * /register endpoint --> POST = user
+// * /register endpoint --> POST
 app.post('/register', (req, res) => {
     handleRegister(req, res, db, bcrypt);
 });
 
-// * /image endpoint --> PUT -->
+// * /image endpoint --> PUT
 app.put('/image', (req, res) => {
     handleImage(req, res, db);
 });
 
-// * /image endpoint --> POST -->
+// * /image endpoint --> POST
 app.post('/imageurl', (req, res) => {
     handleApiCall(req, res);
 });
@@ -52,6 +54,7 @@ app.post('/delete', (req, res) => {
     handleDelete(req, res, db);
 });
 
-app.listen(3001), ()=> {
-    console.log('App is running on port 3000');
+
+app.listen(PORT), ()=> {
+    console.log(`App is running on port ${PORT}`);
 };
