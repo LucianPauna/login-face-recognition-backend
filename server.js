@@ -10,11 +10,8 @@ import { handleDelete } from './controllers/delete.js';
 const db = knex({
     client: 'pg',
     connection: {
-        host : '127.0.0.1',
-        port : 5432,
-        user : 'postgres',
-        password : 'Marian14',
-        database : 'face-recognition'
+        host : process.env.DATABASE_URL,
+        ssl: true
     }
 });
 
@@ -26,7 +23,7 @@ app.use(cors());
 
 // * --> res = this is working
 app.get('/', (req, res) => {
-    res.send('It\'s working!');
+    res.send('It is working!');
 });
 
 // * /signin endpoint --> POST = success/fail
