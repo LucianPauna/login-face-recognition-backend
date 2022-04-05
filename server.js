@@ -10,12 +10,13 @@ import { handleDelete } from './controllers/delete.js';
 process.env.NODE_TLS_REJECT_UNAUTHORIZED = 0;
 
 const db = knex({
+    client: 'pg',
     connection: {
         connectionString: process.env.DATABASE_URL,
         ssl: {
-            rejectUnauthorized: false
-        }
-    }
+            rejectUnauthorized: false,
+        },
+    },
 });
 
 const PORT = process.env.PORT ?? 3001;
